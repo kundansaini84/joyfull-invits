@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+    <style>
+        body {
+            font-family: 'Great Vibes', cursive;
+            background-color: #f5e6e8;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #b76e79;
+            font-size: 3.5em;
+            margin-bottom: 10px;
+        }
+        
+        .names {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            color: #4a4a4a;
+            margin: 20px 0;
+        }
+        
+        .details {
+            font-family: 'Raleway', sans-serif;
+            color: #666;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+        
+        .date-time {
+            font-size: 1.3em;
+            color: #b76e79;
+            margin: 25px 0;
+        }
+        
+        .venue {
+            background-color: #f9f3f4;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+        
+        .rsvp {
+            margin-top: 30px;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        .border-deco {
+            border-top: 2px solid #b76e79;
+            width: 50%;
+            margin: 30px auto;
+        }
+        
+        button {
+            background-color: #b76e79;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #9e5b65;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&family=Raleway&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Wedding Celebration</h1>
+        <div class="border-deco"></div><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+    <style>
+        body {
+            font-family: 'Great Vibes', cursive;
+            background-color: #f5e6e8;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #b76e79;
+            font-size: 3.5em;
+            margin-bottom: 10px;
+        }
+        
+        .names {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            color: #4a4a4a;
+            margin: 20px 0;
+        }
+        
+        .details {
+            font-family: 'Raleway', sans-serif;
+            color: #666;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+        
+        .date-time {
+            font-size: 1.3em;
+            color: #b76e79;
+            margin: 25px 0;
+        }
+        
+        .venue {
+            background-color: #f9f3f4;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+        
+        .border-deco {
+            border-top: 2px solid #b76e79;
+            width: 50%;
+            margin: 30px auto;
+        }
+        
+        button {
+            background-color: #b76e79;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #9e5b65;
+        }
+
+        [contenteditable="true"] {
+            border: 1px dashed #b76e79;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&family=Raleway&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container" id="invitation">
+        <h1 contenteditable="true">Wedding Celebration</h1>
+        <div class="border-deco"></div>
+        
+        <div class="names" contenteditable="true">
+            Sarah Johnson<br>
+            &<br>
+            Michael Carter
+        </div>
+        
+        <div class="details" contenteditable="true">
+            Together with their families<br>
+            Request the pleasure of your company<br>
+            As they exchange vows and begin their new journey together
+        </div>
+        
+        <div class="date-time" contenteditable="true">
+            Saturday, 14th September 2024<br>
+            4:30 in the Evening
+        </div>
+        
+        <div class="venue" contenteditable="true">
+            The Grand Willow Gardens<br>
+            1234 Riverside Drive<br>
+            Springfield, ST 56789
+        </div>
+
+        <div class="button-container">
+            <button onclick="toggleEdit()">Toggle Edit Mode</button>
+            <button onclick="downloadTemplate()">Download Template</button>
+        </div>
+    </div>
+
+    <script>
+        let editMode = true;
+
+        function toggleEdit() {
+            editMode = !editMode;
+            const editableElements = document.querySelectorAll('[contenteditable]');
+            editableElements.forEach(element => {
+                element.contentEditable = editMode;
+                element.style.border = editMode ? '1px dashed #b76e79' : 'none';
+            });
+        }
+
+        function downloadTemplate() {
+            const invitation = document.getElementById('invitation');
+            const content = invitation.outerHTML;
+            const blob = new Blob([`
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>Wedding Invitation</title>
+                    ${document.head.innerHTML}
+                </head>
+                <body>
+                    ${content}
+                </body>
+                </html>
+            `], {type: 'text/html'});
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'wedding-invitation.html';
+            link.click();
+            URL.revokeObjectURL(link.href);
+        }
+
+        // Initialize edit mode
+        toggleEdit();
+    </script>
+</body>
+</html>
+
+        
+        <div class="names">
+            Sarah Johnson<br>
+            &<br>
+            Michael Carter
+        </div>
+        
+        <div class="details">
+            Together with their families<br>
+            Request the pleasure of your company<br>
+            As they exchange vows and begin their new journey together
+        </div>
+        
+        <div class="date-time">
+            Saturday, 14th September 2024<br>
+            4:30 in the Evening
+        </div>
+        
+        <div class="venue">
+            The Grand Willow Gardens<br>
+            1234 Riverside Drive<br>
+            Springfield, ST 56789
+        </div>
+        
+        <div class="rsvp">
+            Kindly RSVP by 1st September<br>
+            Phone: (555) 123-4567<br>
+            Email: sarahandmike@wedding.com
+        </div>
+        
+        <button onclick="alert('Thank you for your RSVP!')">Confirm Attendance</button>
+    </div>
+</body>
+</html>

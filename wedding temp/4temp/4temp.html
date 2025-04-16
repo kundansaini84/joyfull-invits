@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+    <link rel="stylesheet" href="/wedding temp/4temp/style.css">
+    <!-- html2canvas Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="invitation-card" id="invitationCard">
+        <div class="image-section">
+            <input type="file" id="photoUpload" accept="image/*" onchange="previewImage(event)">
+            <img id="uploadedPhoto" src="" alt="Upload your photo" />
+        </div>
+        <div class="text-section">
+            <h1 contenteditable="true">Bride & Groom</h1>
+            <p contenteditable="true">We are delighted to invite you to our wedding!</p>
+            <p contenteditable="true">Date: [Edit Date]</p>
+            <p contenteditable="true">Time: [Edit Time]</p>
+            <p contenteditable="true">Venue: [Edit Venue]</p>
+        </div>
+    </div>
+
+    <button id="downloadBtn">Download Invitation</button>
+
+    <script src="/wedding temp/4temp/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Birthday Invitation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            background-color: #000000;
+            font-family: 'Arial', sans-serif;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div id="invitation" class="relative text-center text-white p-10 bg-gray-900 rounded-lg shadow-lg w-[900px] h-[1200px] flex flex-col items-center">
+        <div class="relative inline-block">
+            <input type="file" id="imageUpload" class="hidden" accept="image/*" onchange="previewImage(event)"/>
+            <label for="imageUpload">
+                <img id="profileImage" src="https://storage.googleapis.com/a1aa/image/Y4W0pR1LXaGRjy1s5p6Z-8KEWfHwGVYCl8pZGmM2Afw.jpg" 
+                     class="rounded-full border-4 border-white cursor-pointer" width="250" height="250" alt="Birthday person"/>
+            </label>
+        </div>
+        <div class="mt-6">
+            <h1 contenteditable="true" class="text-6xl font-bold">HAPPY BIRTHDAY</h1>
+            <p contenteditable="true" class="text-4xl mt-4">To Sona Roy</p>
+        </div>
+        <div class="mt-6 text-2xl">
+            <p contenteditable="true">3rd June 202x, 6pm</p>
+            <p contenteditable="true">Dinner: 7pm onwards</p>
+            <p contenteditable="true">Venue: Panchsheel Club, Panchsheel Park,</p>
+            <p contenteditable="true">New Delhi 110017</p>
+        </div>
+        <div class="flex justify-center mt-6 space-x-6">
+            <img alt="Decorative gift boxes" height="150" src="/birthday temp/4/gift.jpeg" width="150"/>
+            <img alt="Decorative balloons" height="150" src="/birthday temp/4/balloon.jpeg" width="150"/>
+            <img alt="Decorative cake" height="150" src="/birthday temp/4/cake.jpeg" width="150"/>
+        </div>
+        <button onclick="downloadInvitation()" class="mt-8 px-6 py-3 bg-blue-500 text-white text-2xl rounded shadow">
+            Download Invitation
+        </button>
+    </div>
+    
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function(){
+                var output = document.getElementById('profileImage');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+        
+        function downloadInvitation() {
+            html2canvas(document.querySelector("#invitation")).then(canvas => {
+                let link = document.createElement("a");
+                link.download = "Birthday_Invitation.png";
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+            });
+        }
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body>
+</html>

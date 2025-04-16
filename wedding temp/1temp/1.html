@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation Editable Card</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #f5f2f0;
+            margin: 0;
+            font-family: 'Georgia', serif;
+        }
+
+        #invitation {
+            position: relative;
+            width: 600px;
+            height: 900px;
+            background: url('11.png') no-repeat center/cover;
+            border: 10px solid #d6cfc9;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .editable {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            cursor: text;
+            color: #3a3a3a;
+        }
+
+        .editable[contenteditable]:focus {
+            outline: 1px dashed #999;
+        }
+
+        #saveDate {
+            top: 30px;
+            font-size: 18px;
+            letter-spacing: 3px;
+            color: #7a6f64;
+            font-weight: bold;
+        }
+
+        #photo-frame {
+            position: absolute;
+            top: 120px;
+            left: 150px;
+            width: 300px;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid #c5bdb5;
+            background: #ffffff;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #uploaded-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        #names {
+            top: 460px;
+            font-size: 30px;
+            font-family: 'Brush Script MT', cursive;
+            color: #4a4038;
+            font-weight: bold;
+        }
+
+        #inviteText {
+            top: 510px;
+            font-size: 14px;
+            color: #4f4f4f;
+        }
+
+        #date {
+            top: 550px;
+            font-size: 18px;
+            color: #4f4f4f;
+        }
+
+        #time {
+            top: 580px;
+            font-size: 14px;
+            color: #4f4f4f;
+        }
+
+        #address {
+            top: 630px;
+            font-size: 14px;
+            color: #4f4f4f;
+        }
+
+        /* Button styles */
+        #uploadBtn,
+        #downloadBtn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: none;
+            background: #7a6f64;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #uploadBtn:hover,
+        #downloadBtn:hover {
+            background: #5e544d;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="invitation">
+
+        <div id="saveDate" class="editable" contenteditable="true">SAVE THE DATE</div>
+
+        <!-- Photo Frame -->
+        <div id="photo-frame">
+            <img id="uploaded-photo" src="" alt="Photo">
+        </div>
+
+        <div id="names" class="editable" contenteditable="true">Samira & Ahmed</div>
+        <div id="inviteText" class="editable" contenteditable="true">INVITE YOU TO CELEBRATE THEIR MARRIAGE</div>
+        <div id="date" class="editable" contenteditable="true">FEBRUARY 20, 2024</div>
+        <div id="time" class="editable" contenteditable="true">THURSDAY | 10 AM</div>
+        <div id="address" class="editable" contenteditable="true">123 Anywhere St., Any City, ST 12345</div>
+
+    </div>
+
+    <label id="uploadBtn" for="uploadInput">Upload Photo</label>
+    <input type="file" id="uploadInput" accept="image/*">
+
+    <button id="downloadBtn" onclick="downloadCard()">Download Invitation</button>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+        // Upload image inside frame
+        document.getElementById("uploadInput").addEventListener("change", function (e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const img = document.getElementById("uploaded-photo");
+            img.src = URL.createObjectURL(file);
+            img.style.display = "block";
+        });
+
+        // Download as PNG
+        function downloadCard() {
+            html2canvas(document.getElementById("invitation")).then(canvas => {
+                let link = document.createElement('a');
+                link.download = 'wedding-invitation.png';
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+            });
+        }
+    </script>
+
+</body>
+
+</html>

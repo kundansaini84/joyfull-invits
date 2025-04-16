@@ -1,0 +1,105 @@
+/* General Body Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  /* Full-Screen Hero Section */
+  .about-us-hero {
+    background-image: url('/about/11.jpg'); /* Replace with your desired image */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .about-us-hero h2 {
+    font-size: 3.5em;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* About Us Section */
+  .about-us {
+    background-color: #ffffff;
+    padding: 40px;
+    max-width: 900px;
+    margin: -80px auto 40px auto; /* Pull the content section upwards for better design */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Paragraph Styling */
+  p {
+    font-size: 1.2em;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  /* Special Brand Name Styling */
+  .brand-name {
+    color: #ff7f50;
+    font-weight: bold;
+  }
+  
+  /* Headings Styling */
+  h3 {
+    color: #fff;
+    font-size: 2em;
+    margin-top: 30px;
+    padding: 20px;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+  }
+  
+  /* Add different background images to h3 */
+  .mission-heading {
+    background-image: url(''); /* Replace with your desired image */
+    background-color: rgba(0, 0, 0, 0.5); /* Add dark overlay */
+  }
+  
+  .features-heading {
+    background-image: url(''); /* Replace with your desired image */
+    background-color: rgba(0, 0, 0, 0.5); /* Add dark overlay */
+  }
+  
+  .cta-heading {
+    background-image: url(''); /* Replace with your desired image */
+    background-color: rgba(0, 0, 0, 0.5); /* Add dark overlay */
+  }
+  
+  /* Call to Action Section Styling */
+  .call-to-action {
+    font-size: 1.3em;
+    color: #ff6347;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .about-us-hero h2 {
+      font-size: 2.5em;
+    }
+    .about-us {
+      padding: 20px;
+    }
+    .about-us-hero {
+      height: 50vh;
+    }
+    h3 {
+      font-size: 1.5em;
+      padding: 10px;
+    }
+  }
+  

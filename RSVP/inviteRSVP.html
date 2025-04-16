@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Invitation Card</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            padding: 20px;
+        }
+
+        .invitation-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+
+        /* Header Section */
+        .header {
+            margin-bottom: 1.5rem;
+        }
+        .title {
+            color: #2d3436;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .event-name {
+            color: #e84393;
+            font-size: 2rem;
+            margin: 0.5rem 0;
+        }
+
+        /* Details Section */
+        .details {
+            color: #636e72;
+            margin: 1.5rem 0;
+            line-height: 1.6;
+        }
+        .date-time {
+            font-size: 1.2rem;
+            color: #0984e3;
+            margin: 1rem 0;
+            font-weight: bold;
+        }
+        .venue {
+            color: #00b894;
+            font-size: 1.1rem;
+            margin: 1rem 0;
+        }
+
+        /* Buttons */
+        button {
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Forms */
+        .hidden {
+            display: none;
+        }
+        .form-container {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-align: left;
+        }
+        .form-container input, 
+        .form-container textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-container textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="invitation-card" id="invitationCard">
+        <!-- Header Section -->
+        <div class="header">
+            <h1 class="title" id="cardTitle">You're Invited!</h1>
+            <h2 class="event-name" id="eventName">Grand  Celebration</h2>
+        </div>
+
+        <!-- Event Details Section -->
+        <div class="details" id="eventDetails">
+            Join us for an evening of fun, laughter, and celebration!
+        </div>
+        
+        <div class="date-time" id="dateTime">
+            Saturday, 25 November 2023 at 6:00 PM
+        </div>
+
+        <div class="venue" id="venue">
+            The Garden Plaza, Main Street
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button id="rsvpBtn">RSVP</button>
+            <button id="editBtn">Edit</button>
+            <button id="downloadBtn">Download Invitation</button>
+        </div>
+
+        <!-- RSVP Form -->
+        <div class="form-container hidden" id="rsvpForm">
+            <h3>RSVP Form</h3>
+            <label>Your Name:</label>
+            <input type="text" id="name" placeholder="Enter your name">
+            
+            <label>Your Email:</label>
+            <input type="email" id="email" placeholder="Enter your email">
+            
+            <label>Will you attend?</label>
+            <select id="attendance">
+                <option value="yes">I'll be there!</option>
+                <option value="no">Sorry, can't make it</option>
+                <option value="maybe">Not sure yet</option>
+            </select>
+            
+            <div class="form-actions">
+                <button onclick="submitRSVP()">Submit</button>
+                <button onclick="toggleRSVPForm()">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Edit Form -->
+        <div class="form-container hidden" id="editForm">
+            <h3>Edit Invitation</h3>
+            <label>Title:</label>
+            <input type="text" id="editTitle" value="You're Invited!">
+            
+            <label>Event Name:</label>
+            <input type="text" id="editEventName" value="Grand Birthday Celebration">
+            
+            <label>Details:</label>
+            <textarea id="editDetails">Join us for an evening of fun, laughter, and celebration!</textarea>
+            
+            <label>Date and Time:</label>
+            <input type="text" id="editDateTime" value="Saturday, 25 November 2023 at 6:00 PM">
+            
+            <label>Venue:</label>
+            <input type="text" id="editVenue" value="The Garden Plaza, Main Street">
+            
+            <div class="form-actions">
+                <button onclick="saveChanges()">Save</button>
+                <button onclick="cancelEdit()">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Confirmation Message -->
+        <div id="confirmation" class="hidden" style="margin-top: 1rem; color: #00b894; font-weight: bold;"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        const { jsPDF } = window.jspdf;
+
+        // Get all elements
+        const editBtn = document.getElementById('editBtn');
+        const rsvpBtn = document.getElementById('rsvpBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const editForm = document.getElementById('editForm');
+        const rsvpForm = document.getElementById('rsvpForm');
+        const confirmation = document.getElementById('confirmation');
+        
+        // Card elements
+        const cardTitle = document.getElementById('cardTitle');
+        const eventName = document.getElementById('eventName');
+        const eventDetails = document.getElementById('eventDetails');
+        const dateTime = document.getElementById('dateTime');
+        const venue = document.getElementById('venue');
+        
+        // Form elements
+        const editTitle = document.getElementById('editTitle');
+        const editEventName = document.getElementById('editEventName');
+        const editDetails = document.getElementById('editDetails');
+        const editDateTime = document.getElementById('editDateTime');
+        const editVenue = document.getElementById('editVenue');
+
+        // Event listeners
+        editBtn.addEventListener('click', showEditForm);
+        rsvpBtn.addEventListener('click', toggleRSVPForm);
+        downloadBtn.addEventListener('click', downloadInvitation);
+
+        // Show edit form
+        function showEditForm() {
+            editTitle.value = cardTitle.textContent;
+            editEventName.value = eventName.textContent;
+            editDetails.value = eventDetails.textContent;
+            editDateTime.value = dateTime.textContent;
+            editVenue.value = venue.textContent;
+            
+            editForm.classList.remove('hidden');
+            rsvpForm.classList.add('hidden');
+            confirmation.classList.add('hidden');
+        }
+
+        // Toggle RSVP form
+        function toggleRSVPForm() {
+            rsvpForm.classList.toggle('hidden');
+            editForm.classList.add('hidden');
+            confirmation.classList.add('hidden');
+        }
+
+        // Save changes
+        function saveChanges() {
+            cardTitle.textContent = editTitle.value;
+            eventName.textContent = editEventName.value;
+            eventDetails.textContent = editDetails.value;
+            dateTime.textContent = editDateTime.value;
+            venue.textContent = editVenue.value;
+            
+            editForm.classList.add('hidden');
+            showConfirmation("Changes saved successfully!");
+        }
+
+        // Cancel editing
+        function cancelEdit() {
+            editForm.classList.add('hidden');
+        }
+
+        // Submit RSVP
+        function submitRSVP() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const attendance = document.getElementById('attendance').value;
+            
+            if (name && email) {
+                let message = `Thank you, ${name}! `;
+                if (attendance === 'yes') message += "We're excited to see you!";
+                else if (attendance === 'no') message += "We'll miss you!";
+                else message += "Let us know when you decide!";
+                
+                showConfirmation(message);
+                rsvpForm.classList.add('hidden');
+                
+                // Reset form
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('attendance').value = 'yes';
+            }
+        }
+
+        // Show confirmation message
+        function showConfirmation(message) {
+            confirmation.textContent = message;
+            confirmation.classList.remove('hidden');
+            setTimeout(() => confirmation.classList.add('hidden'), 3000);
+        }
+
+        // Download invitation as a PDF
+        function downloadInvitation() {
+            const doc = new jsPDF();
+            
+            doc.setFont("Arial", "normal");
+            doc.setFontSize(22);
+            doc.text("You're Invited!", 20, 30);
+            
+            doc.setFontSize(18);
+            doc.text(eventName.textContent, 20, 50);
+            doc.setFontSize(14);
+            doc.text(eventDetails.textContent, 20, 70);
+            doc.text(dateTime.textContent, 20, 90);
+            doc.text(venue.textContent, 20, 110);
+            
+            doc.save("invitation.pdf");
+        }
+    </script>
+</body>
+</html>

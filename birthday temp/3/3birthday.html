@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <title>Editable Invitation</title>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div id="invitation" class="bg-blue-200 p-10 rounded-lg shadow-lg max-w-2xl mx-auto text-center text-2xl">
+        <div class="flex justify-center mb-6 space-x-4">
+            <img class="w-24 h-24" src="https://storage.googleapis.com/a1aa/image/ed3sODJpxnyu9rxhJsDWdfD50rP7oY6ft51lhI3jbEM.jpg"/>
+            <img class="w-24 h-24" src="https://storage.googleapis.com/a1aa/image/ed3sODJpxnyu9rxhJsDWdfD50rP7oY6ft51lhI3jbEM.jpg"/>
+            <img class="w-24 h-24" src="https://storage.googleapis.com/a1aa/image/ed3sODJpxnyu9rxhJsDWdfD50rP7oY6ft51lhI3jbEM.jpg"/>
+        </div>
+        <p contenteditable="true" class="text-gray-700 font-roboto">Join us to celebrate</p>
+        <h1 contenteditable="true" class="text-6xl font-indie-flower text-gray-800">Sebastian's</h1>
+        <h2 contenteditable="true" class="text-6xl font-indie-flower text-gray-800">1st Birthday</h2>
+        <div class="my-6 relative">
+            <input type="file" id="upload" accept="image/*" class="hidden" onchange="previewImage(event)"/>
+            <label for="upload" class="cursor-pointer">
+                <img id="uploadedImage" class="rounded-full mx-auto w-48 h-48 object-cover" src="https://storage.googleapis.com/a1aa/image/CGZxIl1PcCuzJeypF8dSK1acnhUTmONd26kHQpAwFJo.jpg"/>
+            </label>
+        </div>
+        <div contenteditable="true" class="bg-gray-800 text-white py-3 px-6 rounded-full inline-block mb-6">
+            <p>8 October, 2024 | at 3:00pm</p>
+        </div>
+        <p contenteditable="true" class="text-gray-700 font-roboto">123 Anywhere St., Any City, ST 12345</p>
+        <p contenteditable="true" class="text-gray-700 font-roboto">RSVP to Donna at +123-456-7890</p>
+        <button onclick="downloadInvitation()" class="mt-6 bg-green-500 text-white px-6 py-3 rounded text-2xl">Download</button>
+    </div>
+
+    <script>
+        function downloadInvitation() {
+            html2canvas(document.querySelector("#invitation")).then(canvas => {
+                let link = document.createElement("a");
+                link.href = canvas.toDataURL("image/png");
+                link.download = "invitation.png";
+                link.click();
+            });
+        }
+        
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById("uploadedImage").src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</body>
+</html>

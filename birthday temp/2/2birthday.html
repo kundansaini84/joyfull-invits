@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Party Invitation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #000;
+            color: #FFD700;
+        }
+        .title {
+            font-family: 'Playfair Display', serif;
+        }
+        .editable {
+            display: inline-block;
+            border-bottom: 1px dashed #FFD700;
+            cursor: text;
+        }
+        #invitation {
+            width: 1000px;
+            height: 1400px;
+            padding: 50px;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen">
+    <div id="invitation" class="text-center bg-black rounded-lg shadow-lg relative overflow-hidden">
+        <img src="https://storage.googleapis.com/a1aa/image/Gz5pIWRq4uUwxAkdt8e-DttBDPx-VFqeVqkZxApUVSI.jpg" width="1000" height="150" class="absolute top-0 left-0 w-full h-32 object-cover" alt="Banner">
+        <div class="relative z-10 mt-24">
+            <p class="text-lg">YOU ARE INVITED TO</p>
+            <h1 contenteditable="true" class="title text-8xl font-bold mt-4 editable">Birthday Party</h1>
+            <div class="flex justify-center mt-6">
+                <div class="bg-gold-500 text-black py-2 px-6 rounded-full">
+                    <p contenteditable="true" class="text-4xl font-bold editable">MORGAN MAXWELL</p>
+                </div>
+            </div>
+            <p contenteditable="true" class="mt-6 text-3xl editable">Let the celebration begin! Cheers to another year of fabulous moments and unforgettable memories.</p>
+            <div class="mt-8 text-3xl">
+                <p class="font-bold editable" contenteditable="true">TUESDAY</p>
+                <p class="font-bold mt-2">
+                    <span contenteditable="true" class="editable">FEBRUARY</span>
+                    <span class="border-2 border-gold-500 px-4 py-2 rounded editable" contenteditable="true">20</span>
+                    AT <span contenteditable="true" class="editable">11.00 AM</span>
+                </p>
+            </div>
+            <div class="mt-8 text-3xl">
+                <p contenteditable="true" class="editable">123 Anywhere St., Any City, ST 12345</p>
+                <p contenteditable="true" class="editable">www.reallygreatsite.com</p>
+            </div>
+        </div>
+        <div class="mt-8">
+            <button onclick="downloadInvitation()" class="mt-6 px-8 py-4 bg-yellow-500 text-black text-2xl font-bold rounded-lg">Download</button>
+        </div>
+    </div>
+
+    <script>
+        function downloadInvitation() {
+            const element = document.getElementById('invitation');
+            html2canvas(element, { scale: 2 }).then(canvas => {
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL("image/png");
+                link.download = 'Birthday_Invitation.png';
+                link.click();
+            });
+        }
+    </script>
+</body>
+</html>
